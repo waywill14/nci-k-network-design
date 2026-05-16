@@ -1,22 +1,19 @@
-<<<<<<< HEAD
-# nci-k-network-design
+nci-k-network-design
 NCI-K Hierarchical Network Design — Cisco Packet Tracer | VLANs, IPSec VPN, QoS, Dual Subnet
-=======
-\# NCI-K Hierarchical Network Design
+
+NCI-K Hierarchical Network Design
 
 
 
-\*\*Institution:\*\* National Cancer Institute of Kenya — Ministry of Health  
+Institution:National Cancer Institute of Kenya — Ministry of Health  
 
-\*\*Designed by:\*\* Wayne Adwera | ICT Support Officer  
+Designed by:Wayne Adwera  
 
-\*\*Tool:\*\* Cisco Packet Tracer 8.x  
-
-\*\*GitHub:\*\* github.com/waywill14  
+Tool:Cisco Packet Tracer 8.2
 
 
 
-\## Overview
+Overview
 
 
 
@@ -28,7 +25,7 @@ where ISP-delivered 700 Mbps degraded to 30-50 Mbps at end devices.
 
 
 
-\## Physical Devices Used
+Physical Devices Used
 
 
 
@@ -50,7 +47,7 @@ where ISP-delivered 700 Mbps degraded to 30-50 Mbps at end devices.
 
 
 
-\## VLAN Plan
+VLAN Plan
 
 
 
@@ -84,37 +81,31 @@ where ISP-delivered 700 Mbps degraded to 30-50 Mbps at end devices.
 
 
 
-\## Key Features
+Key Features
 
 
 
-\- \*\*Bottleneck fix:\*\* CBWFQ guarantees VoIP 70 Mbps, Clinical 200 Mbps,
+Bottleneck fix:CBWFQ guarantees VoIP 70 Mbps, Clinical 200 Mbps,
 
-&#x20; Directorates 150 Mbps. RSTP replaces legacy STP — convergence under 2 seconds.
+Directorates 150 Mbps. RSTP replaces legacy STP — convergence under 2 seconds.
 
-\- \*\*Dual subnet:\*\* New 10.118.x.x production network + legacy 10.10.20.0/24
+Dual subnet:New 10.118.x.x production network + legacy 10.10.20.0/24 retained via dedicated Core Router Gi0/2 cable interface.
 
-&#x20; retained via dedicated Core Router Gi0/2 cable interface.
+IPSec VPN:AES-256/SHA256. Remote clients reach both new and legacy subnets through a single encrypted tunnel.
 
-\- \*\*IPSec VPN:\*\* AES-256/SHA256. Remote clients reach both new and legacy
+VoIP:Cisco 7960 IP phones on VLAN 70. DHCP option 150 for TFTP.
 
-&#x20; subnets through a single encrypted tunnel.
+DSCP EF strict priority on all phone switch ports.
 
-\- \*\*VoIP:\*\* Cisco 7960 IP phones on VLAN 70. DHCP option 150 for TFTP.
+Directorate segmentation:Per-directorate VLANs enforce KDPA 2019 compliance — Finance, Research, DG-Office and ICT are isolated from each other.
 
-&#x20; DSCP EF strict priority on all phone switch ports.
+Wireless: 8 access points with WPA2-PSK, one per department zone.
 
-\- \*\*Directorate segmentation:\*\* Per-directorate VLANs enforce KDPA 2019
-
-&#x20; compliance — Finance, Research, DG-Office and ICT are isolated from each other.
-
-\- \*\*Wireless:\*\* 8 access points with WPA2-PSK, one per department zone.
-
-\- \*\*Server security:\*\* Sticky MAC port-security on all Huawei switch ports.
+Server security:Sticky MAC port-security on all Huawei switch ports.
 
 
 
-\## Server Farm
+Server Farm
 
 
 
@@ -134,32 +125,32 @@ where ISP-delivered 700 Mbps degraded to 30-50 Mbps at end devices.
 
 
 
-\## Standards Met
+Standards Met
 
 
 
-\- ISO/IEC 27001 — Access control, change management
+ISO/IEC 27001 — Access control, change management
 
-\- Kenya Data Protection Act 2019 — Directorate VLAN isolation
+Kenya Data Protection Act 2019 — Directorate VLAN isolation
 
-\- QoS — CBWFQ + DSCP end-to-end marking
+QoS — CBWFQ + DSCP end-to-end marking
 
-\- RSTP — Sub-2-second convergence
+RSTP — Sub-2-second convergence
 
-\- IPSec IKEv1 — AES-256 SHA256 Group 5
-
-
-
-\## How to Open
+IPSec IKEv1 — AES-256 SHA256 Group 5
 
 
 
-1\. Install Cisco Packet Tracer 8.x from netacad.com
-
-2\. Open `NCI-K-Hierarchical-Network.pkt`
-
-3\. All configurations are pre-loaded on every device
+How to Open
 
 
 
->>>>>>> 5373fb6 (feat: initial commit — NCI-K hierarchical network design with VoIP, VPN, dual subnet and directorate VLANs)
+1. Install Cisco Packet Tracer 8.x from netacad.com
+
+2. Open `NCI-K-Hierarchical-Network.pkt`
+
+3. All configurations are pre-loaded on every device
+
+
+
+(feat: initial commit — NCI-K hierarchical network design with VoIP, VPN, dual subnet and directorate VLANs)
