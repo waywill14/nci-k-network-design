@@ -1,0 +1,9 @@
+# Core Router specific variables
+asa_inside_link: "10.0.1.2"
+asa_inside_mask: "255.255.255.252"
+legacy_cable_ip: "10.10.20.254"
+legacy_cable_mask: "255.255.255.0"
+legacy_interface: "GigabitEthernet0/2"
+trunk_interface: "GigabitEthernet0/1"
+ospf_process: 1
+ospf_area: 0

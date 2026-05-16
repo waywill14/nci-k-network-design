@@ -1,0 +1,12 @@
+# Huawei server switch specific variables
+management_ip: "10.118.10.20"
+management_mask: "255.255.255.0"
+default_gateway: "10.118.10.1"
+uplink_port: "GigabitEthernet0/1"
+server_vlan: 60
+server_ports:
+  - { port: "FastEthernet0/1", server: "SERVER-WEB",  ip: "10.118.60.10" }
+  - { port: "FastEthernet0/2", server: "SERVER-DNS",  ip: "10.118.60.11" }
+  - { port: "FastEthernet0/3", server: "SERVER-ERP",  ip: "10.118.60.12" }
+  - { port: "FastEthernet0/4", server: "SERVER-DB",   ip: "10.118.60.13" }
+  - { port: "FastEthernet0/5", server: "SERVER-EMR",  ip: "10.118.60.14" }

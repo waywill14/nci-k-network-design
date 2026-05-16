@@ -1,0 +1,38 @@
+---
+# Backup running configs from all NCI-K devices
+# Usage: ansible-playbook playbooks/backup-configs.yml -i inventory/hosts.yml
+# Run this daily or before any major change
+
+- name: NCI-K Configuration Backup
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Capture running configuration
+      cisco.ios.ios_command:
+        commands: show running-config
+      register: config_output
+
+    - name: Get current date
+      command: date /T
+      register: current_date
+      delegate_to: localhost
+
+    - name: Save config to local backup file
+      copy:
+        content: "{{ config_output.stdout[0] }}"
+        dest: "configs/backups/{{ inventory_hostname }}-{{ current_date.stdout | trim | replace('/', '-') }}.cfg"
+      delegate_to: localhost
+
+    - name: Commit backup to Git
+      shell: |
+        cd configs/backups
+        git add .
+        git commit -m "maint: backup {{ inventory_hostname }} {{ current_date.stdout | trim }}"
+      delegate_to: localhost
+      ignore_errors: true
+
+    - name: Push backup to GitHub
+      shell: git push origin main
+      delegate_to: localhost
+      ignore_errors: true

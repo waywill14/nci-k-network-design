@@ -1,0 +1,50 @@
+---
+# Deploy IPSec VPN configuration to Edge Router
+
+- name: Configure IKE Phase 1 policy
+  cisco.ios.ios_config:
+    lines:
+      - crypto isakmp policy 10
+      - " encr aes 256"
+      - " hash sha256"
+      - " authentication pre-share"
+      - " group 5"
+      - " lifetime 86400"
+  when: inventory_hostname == "edge-router"
+
+- name: Set pre-shared key
+  cisco.ios.ios_config:
+    lines:
+      - "crypto isakmp key {{ vpn_key }} address 0.0.0.0 0.0.0.0"
+  when: inventory_hostname == "edge-router"
+
+- name: Configure transform set
+  cisco.ios.ios_config:
+    lines:
+      - crypto ipsec transform-set NCIK-TS esp-aes 256 esp-sha256-hmac
+      - " mode tunnel"
+  when: inventory_hostname == "edge-router"
+
+- name: Configure VPN pool
+  cisco.ios.ios_config:
+    lines:
+      - "ip local pool VPNPOOL {{ vpn_pool_start }} {{ vpn_pool_end }}"
+  when: inventory_hostname == "edge-router"
+
+- name: Verify VPN SA status
+  cisco.ios.ios_command:
+    commands:
+      - show crypto isakmp sa
+      - show crypto ipsec sa
+  register: vpn_status
+  when: inventory_hostname == "edge-router"
+
+- name: Print VPN status
+  debug:
+    var: vpn_status.stdout_lines
+  when: inventory_hostname == "edge-router"
+
+- name: Save configuration
+  cisco.ios.ios_command:
+    commands: write memory
+  when: inventory_hostname == "edge-router"

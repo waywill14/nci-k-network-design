@@ -1,0 +1,20 @@
+---
+# Deploy all NCI-K VLANs to switches
+
+- name: Push VLAN definitions to switch
+  cisco.ios.ios_vlans:
+    config: "{{ nci_vlans }}"
+    state: merged
+
+- name: Verify VLANs exist
+  cisco.ios.ios_command:
+    commands: show vlan brief
+  register: vlan_output
+
+- name: Print VLAN table
+  debug:
+    var: vlan_output.stdout_lines
+
+- name: Save configuration
+  cisco.ios.ios_command:
+    commands: write memory

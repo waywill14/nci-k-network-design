@@ -3,9 +3,20 @@
 Thumbs.db
 desktop.ini
 
-# Backup files
-*.bak
-*.tmp
-
 # Packet Tracer autosave
 *.pkt.bak
+
+# Ansible vault (never commit secrets)
+*vault*
+*.vault
+.vault_pass
+
+# Python cache
+*.pyc
+__pycache__/
+.ansible/
+
+# Temporary files
+*.tmp
+*.bak
+*.retry

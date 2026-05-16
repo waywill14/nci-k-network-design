@@ -1,0 +1,9 @@
+---
+# Deploy only VLANs — use when adding or changing VLANs only
+# Usage: ansible-playbook playbooks/deploy-vlans.yml -i inventory/hosts.yml
+
+- name: NCI-K VLAN Deployment
+  hosts: switches
+  gather_facts: false
+  roles:
+    - vlans

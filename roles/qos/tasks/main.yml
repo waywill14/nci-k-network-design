@@ -1,0 +1,41 @@
+---
+# Deploy QoS policies to NCI-K routers
+
+- name: Configure DSCP class-maps on Core Router
+  cisco.ios.ios_config:
+    lines:
+      - class-map match-any CM-VOIP
+      - " match dscp ef"
+      - class-map match-any CM-BOARDROOM
+      - " match dscp af41"
+      - class-map match-any CM-CLINICAL
+      - " match dscp af31"
+      - class-map match-any CM-DIRECTORATE
+      - " match dscp af21"
+  when: inventory_hostname == "core-router"
+
+- name: Configure CBWFQ policy on Edge Router
+  cisco.ios.ios_config:
+    lines:
+      - policy-map WAN-CBWFQ
+      - " class CM-VOIP"
+      - "  priority 70000"
+      - " class CM-BOARDROOM"
+      - "  priority 50000"
+      - " class CM-CLINICAL"
+      - "  bandwidth 200000"
+      - " class CM-DIRECTORATE"
+      - "  bandwidth 150000"
+      - " class class-default"
+      - "  fair-queue"
+  when: inventory_hostname == "edge-router"
+
+- name: Enable mls qos on switches
+  cisco.ios.ios_config:
+    lines:
+      - mls qos
+  when: inventory_hostname in ["meraki-sw", "huawei-server-sw"]
+
+- name: Save configuration
+  cisco.ios.ios_command:
+    commands: write memory

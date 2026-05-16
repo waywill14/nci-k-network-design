@@ -1,0 +1,14 @@
+# Edge Router specific variables
+wan_ip: "203.0.113.2"
+wan_mask: "255.255.255.252"
+isp_gateway: "203.0.113.1"
+asa_outside_ip: "10.0.0.1"
+asa_outside_mask: "255.255.255.252"
+
+vpn_peer: "198.51.100.2"
+vpn_key: "NCI@K2026#Secure"
+vpn_pool_start: "10.118.200.1"
+vpn_pool_end: "10.118.200.254"
+
+qos_policy: "WAN-CBWFQ"
+nat_interface: "GigabitEthernet0/0"

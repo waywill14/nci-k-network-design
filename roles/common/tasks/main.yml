@@ -1,0 +1,34 @@
+---
+# Common tasks applied to ALL NCI-K devices
+
+- name: Set device hostname
+  cisco.ios.ios_hostname:
+    config:
+      hostname: "{{ inventory_hostname | upper }}"
+    state: merged
+
+- name: Disable DNS lookup (prevents delay on typos)
+  cisco.ios.ios_config:
+    lines:
+      - no ip domain-lookup
+
+- name: Set login banner
+  cisco.ios.ios_banner:
+    banner: login
+    text: |
+      ******************************************
+      * NCI-K Network Device                   *
+      * Authorised Access Only                 *
+      * Ministry of Health — Kenya             *
+      * Unauthorised access is prohibited      *
+      ******************************************
+    state: present
+
+- name: Enable password encryption
+  cisco.ios.ios_config:
+    lines:
+      - service password-encryption
+
+- name: Save configuration
+  cisco.ios.ios_command:
+    commands: write memory

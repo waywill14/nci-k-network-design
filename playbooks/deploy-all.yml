@@ -1,0 +1,22 @@
+---
+# Deploy full NCI-K network configuration to all devices
+# Usage: ansible-playbook playbooks/deploy-all.yml -i inventory/hosts.yml
+
+- name: NCI-K Full Network Deployment
+  hosts: all
+  gather_facts: false
+  roles:
+    - common
+    - vlans
+    - qos
+    - vpn
+
+  post_tasks:
+    - name: Final verification — show interface status
+      cisco.ios.ios_command:
+        commands: show ip interface brief
+      register: interface_status
+
+    - name: Print interface status
+      debug:
+        var: interface_status.stdout_lines

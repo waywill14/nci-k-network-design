@@ -1,0 +1,9 @@
+---
+# Deploy VPN configuration only
+# Usage: ansible-playbook playbooks/deploy-vpn.yml -i inventory/hosts.yml
+
+- name: NCI-K VPN Deployment
+  hosts: routers
+  gather_facts: false
+  roles:
+    - vpn

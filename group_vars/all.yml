@@ -1,0 +1,46 @@
+Connection settings
+────────────────────────────────────────────
+ansible_network_os: ios
+ansible_connection: network_cli
+ansible_user: ncik-admin
+ansible_password: "{{ vault_device_password }}"
+ansible_become: true
+ansible_become_method: enable
+ansible_become_password: "{{ vault_enable_password }}"
+
+NCI-K VLAN definitions 
+─────────────────────────────────────────
+nci_vlans:
+  - { id: 10,  name: MANAGEMENT }
+  - { id: 20,  name: CLINICAL }
+  - { id: 30,  name: DG-OFFICE }
+  - { id: 31,  name: FINANCE }
+  - { id: 32,  name: RESEARCH }
+  - { id: 33,  name: ICT }
+  - { id: 40,  name: ADMIN }
+  - { id: 50,  name: GUEST-WIFI }
+  - { id: 51,  name: BOARDROOM }
+  - { id: 60,  name: SERVERS }
+  - { id: 70,  name: VOIP }
+  - { id: 99,  name: NATIVE }
+
+Subnet definitions 
+─────────────────────────────────────────────
+nci_subnets:
+  management:  "10.118.10.0/24"
+  clinical:    "10.118.20.0/24"
+  dg_office:   "10.118.30.0/24"
+  finance:     "10.118.31.0/24"
+  research:    "10.118.32.0/24"
+  ict:         "10.118.33.0/24"
+  admin:       "10.118.40.0/24"
+  guest:       "10.118.50.0/24"
+  boardroom:   "10.118.51.0/24"
+  servers:     "10.118.60.0/24"
+  voip:        "10.118.70.0/24"
+  vpn_pool:    "10.118.200.0/24"
+  legacy:      "10.10.20.0/24"
+
+DNS and NTP ────────────────────────────────────────────────────
+dns_server: "10.118.60.11"
+ntp_server: "10.118.60.11"
