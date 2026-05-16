@@ -1,7 +1,12 @@
-nci-k-network-design
 NCI-K Hierarchical Network Design — Cisco Packet Tracer | VLANs, IPSec VPN, QoS, Dual Subnet
 
+
+
+
+
 NCI-K Hierarchical Network Design
+
+
 
 
 
@@ -10,6 +15,8 @@ Institution:National Cancer Institute of Kenya — Ministry of Health
 Designed by:Wayne Adwera  
 
 Tool:Cisco Packet Tracer 8.2
+
+
 
 
 
@@ -22,6 +29,8 @@ World-class hierarchical network design for NCI-K addressing QoS,
 Availability, Security and Reliability. Solves the documented bottleneck
 
 where ISP-delivered 700 Mbps degraded to 30-50 Mbps at end devices.
+
+
 
 
 
@@ -44,6 +53,8 @@ Physical Devices Used
 | Meraki Switch | Cisco 3650-24PS | Single 10G switch, all end-device VLANs |
 
 | Huawei Switch | Cisco 3560-24PS | Server farm only, VLAN 60 |
+
+
 
 
 
@@ -81,6 +92,8 @@ VLAN Plan
 
 
 
+
+
 Key Features
 
 
@@ -105,6 +118,8 @@ Server security:Sticky MAC port-security on all Huawei switch ports.
 
 
 
+
+
 Server Farm
 
 
@@ -125,6 +140,21 @@ Server Farm
 
 
 
+
+
+Automation
+
+
+
+
+
+Ansible playbooks in /playbooks — run deploy-all.yml for full push.
+Configs version-controlled in /configs/backups with daily Git commits.
+
+
+
+
+
 Standards Met
 
 
@@ -138,6 +168,8 @@ QoS — CBWFQ + DSCP end-to-end marking
 RSTP — Sub-2-second convergence
 
 IPSec IKEv1 — AES-256 SHA256 Group 5
+
+
 
 
 
